@@ -65,6 +65,10 @@ export default function PaymentsTable({ initialPayments }: { initialPayments: Pa
     }).format(cents / 100);
   };
 
+  const formatStatus = (status: string) => {
+    return status.replace(/_/g, ' ');
+  };
+
   const handleApprove = async (paymentId: string) => {
     setConfirmDialog({
       open: true,
@@ -174,7 +178,7 @@ export default function PaymentsTable({ initialPayments }: { initialPayments: Pa
                     <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-gray-600 text-xs sm:text-sm">{formatPrice(payment.amountCents, (payment.order.currency || 'IDR') as string)}</TableCell>
                     <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-gray-600 text-xs sm:text-sm">{payment.method}</TableCell>
                     <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5">
-                      <Badge className="bg-yellow-100 text-yellow-800 text-xs">{payment.status}</Badge>
+                      <Badge className="bg-yellow-100 text-yellow-800 text-xs">{formatStatus(payment.status)}</Badge>
                     </TableCell>
                     <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-gray-600 text-xs sm:text-sm">{new Date(payment.createdAt).toLocaleDateString()}</TableCell>
                     <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-right">

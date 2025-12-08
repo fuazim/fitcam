@@ -127,10 +127,10 @@ export default async function SubscriptionListPage() {
             </div>
           </AnimateOnScroll>
           <AnimateOnScroll animation="fadeInUp" delay={100}>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-8 max-w-[1132px] w-full mx-auto mt-8 sm:mt-12 md:mt-16 lg:mt-20 mb-8 sm:mb-12 md:mb-16 lg:mb-[124px] px-3 sm:px-4 md:px-0">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-8 max-w-[1132px] w-full mx-auto mt-8 sm:mt-12 md:mt-16 lg:mt-20 mb-8 sm:mb-12 md:mb-16 lg:mb-[124px] px-4 sm:px-6 md:px-10">
               {plans.map((plan, index) => (
                 <AnimateOnScroll key={plan.id} animation="scaleIn" delay={150 + (index * 100)}>
-              <div key={plan.id} className="card flex flex-col w-full sm:w-[calc(50%-8px)] lg:w-[356px] rounded-3xl p-4 sm:p-6 md:p-8 gap-4 sm:gap-6 bg-white">
+              <div key={plan.id} className="card flex flex-col w-full sm:w-[calc(50%-8px)] lg:w-[356px] rounded-3xl p-5 sm:p-6 md:p-8 lg:p-10 gap-4 sm:gap-6 bg-white">
                 <div className="flex w-full h-[150px] sm:h-[180px] md:h-[200px] rounded-3xl overflow-hidden bg-fitcamp-royal-blue">
                   <Image 
                     src={plan.image} 

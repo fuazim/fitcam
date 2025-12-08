@@ -49,6 +49,10 @@ export default function PaymentDetail({
     }).format(cents / 100);
   };
 
+  const formatStatus = (status: string) => {
+    return status.replace(/_/g, ' ');
+  };
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-6">
@@ -58,7 +62,7 @@ export default function PaymentDetail({
         </div>
         <div>
           <p className="text-sm text-gray-500 mb-2">Status</p>
-          <Badge className="bg-yellow-100 text-yellow-800">{payment.status}</Badge>
+          <Badge className="bg-yellow-100 text-yellow-800">{formatStatus(payment.status)}</Badge>
         </div>
       </div>
 

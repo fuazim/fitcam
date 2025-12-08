@@ -82,6 +82,10 @@ export default function OrdersTable({ initialOrders }: { initialOrders: Order[] 
     }).format(cents / 100);
   };
 
+  const formatStatus = (status: string) => {
+    return status.replace(/_/g, ' ');
+  };
+
   const exportToExcel = () => {
     try {
       // Prepare data for Excel
@@ -228,7 +232,7 @@ export default function OrdersTable({ initialOrders }: { initialOrders: Order[] 
                   <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-gray-600 text-xs sm:text-sm">{order.plan.name}</TableCell>
                   <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-gray-600 text-xs sm:text-sm">{formatPrice(order.totalCents, order.currency || 'IDR')}</TableCell>
                   <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5">
-                    <Badge className={`${getStatusColor(order.status)} text-xs`}>{order.status}</Badge>
+                    <Badge className={`${getStatusColor(order.status)} text-xs`}>{formatStatus(order.status)}</Badge>
                   </TableCell>
                   <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-gray-600 text-xs sm:text-sm">{new Date(order.createdAt).toLocaleDateString()}</TableCell>
                   <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-right">

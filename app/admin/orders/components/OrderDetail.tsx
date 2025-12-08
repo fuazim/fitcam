@@ -70,6 +70,10 @@ export default function OrderDetail({ order }: { order: Order }) {
     }
   };
 
+  const formatStatus = (status: string) => {
+    return status.replace(/_/g, ' ');
+  };
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-6">
@@ -79,7 +83,7 @@ export default function OrderDetail({ order }: { order: Order }) {
         </div>
         <div>
           <p className="text-sm text-gray-500 mb-2">Status</p>
-          <Badge className={getStatusColor(order.status)}>{order.status}</Badge>
+          <Badge className={getStatusColor(order.status)}>{formatStatus(order.status)}</Badge>
         </div>
       </div>
 
@@ -153,7 +157,7 @@ export default function OrderDetail({ order }: { order: Order }) {
               <div className="flex justify-between items-center py-1">
                 <span className="text-gray-500">Status:</span>
                 <Badge className={getStatusColor(order.payment.status)}>
-                  {order.payment.status}
+                  {formatStatus(order.payment.status)}
                 </Badge>
               </div>
               {order.payment.proofUrl && (
@@ -183,7 +187,7 @@ export default function OrderDetail({ order }: { order: Order }) {
               <div className="flex justify-between items-center py-1">
                 <span className="text-gray-500">Status:</span>
                 <Badge className={getStatusColor(order.ticket.status)}>
-                  {order.ticket.status}
+                  {formatStatus(order.ticket.status)}
                 </Badge>
               </div>
               <div className="flex justify-between items-center py-1">

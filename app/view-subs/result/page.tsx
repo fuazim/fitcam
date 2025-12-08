@@ -146,6 +146,10 @@ export default function ViewSubsResultPage() {
     return `${month} ${day}, ${year}`;
   };
 
+  const formatStatus = (status: string) => {
+    return status.replace(/_/g, ' ');
+  };
+
   if (loading) {
     return (
       <main className="pb-0">
@@ -214,7 +218,7 @@ export default function ViewSubsResultPage() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
               <p className="font-['ClashDisplay-SemiBold'] text-sm sm:text-base leading-[19px] tracking-[0.05em]">Payment Status</p>
               <p className={`rounded-full py-2 sm:py-3 px-4 sm:px-6 w-fit text-xs sm:text-sm font-semibold leading-[19px] tracking-[0.05em] text-white ${getStatusColor(paymentStatus)}`}>
-                {paymentStatus}
+                {formatStatus(paymentStatus)}
               </p>
             </div>
           </div>
