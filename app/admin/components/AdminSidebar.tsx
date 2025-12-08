@@ -12,6 +12,7 @@ import {
   ShoppingCart,
   LogOut,
   Menu,
+  X,
   Wrench,
   MessageSquare,
   Ticket,
@@ -46,14 +47,18 @@ export default function AdminSidebar({ user }: AdminSidebarProps) {
   return (
     <>
       {/* Mobile menu button */}
-      <div className="lg:hidden fixed top-4 left-4 z-50">
+      <div className="lg:hidden fixed top-4 right-4 z-50">
         <Button
           variant="outline"
           size="icon"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="bg-white shadow-md"
+          className="bg-fitcamp-royal-blue hover:bg-fitcamp-royal-blue/90 text-white border-fitcamp-royal-blue shadow-md"
         >
-          <Menu className="h-5 w-5" />
+          {mobileMenuOpen ? (
+            <X className="h-5 w-5" />
+          ) : (
+            <Menu className="h-5 w-5" />
+          )}
         </Button>
       </div>
 
@@ -76,15 +81,6 @@ export default function AdminSidebar({ user }: AdminSidebarProps) {
                 className="h-10 w-auto"
               />
             </Link>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <span className="sr-only">Close menu</span>
-              ×
-            </Button>
           </div>
 
           {/* Navigation */}

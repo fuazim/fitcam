@@ -134,55 +134,55 @@ export default function TestimonialsTable({
   };
 
   return (
-    <div className="bg-white rounded-[32px] shadow-sm border border-gray-100 overflow-hidden">
-      <div className="px-8 sm:px-10 py-8 border-b border-gray-200 bg-white">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold text-gray-900">All Testimonials</h2>
+    <div className="bg-white rounded-2xl sm:rounded-[32px] shadow-sm border border-gray-100 overflow-hidden">
+      <div className="px-4 sm:px-6 md:px-8 lg:px-10 py-4 sm:py-6 md:py-8 border-b border-gray-200 bg-white">
+        <div className="mb-4 sm:mb-6">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">All Testimonials</h2>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
               <Button
                 onClick={handleCreate}
-                className="bg-fitcamp-royal-blue hover:bg-fitcamp-royal-blue/90 text-white px-6 py-2.5 rounded-lg font-medium shadow-sm"
+                className="w-full bg-fitcamp-royal-blue hover:bg-fitcamp-royal-blue/90 text-white px-6 py-2.5 rounded-lg font-medium shadow-sm"
               >
                 <Plus className="mr-2 h-4 w-4" />
                 Add Testimonial
               </Button>
             </DialogTrigger>
-            <DialogContent className="p-6 max-w-2xl max-h-[90vh] overflow-y-auto">
-              <DialogHeader className="pb-6">
-                <DialogTitle className="text-2xl font-bold">{editingTestimonial ? 'Edit Testimonial' : 'Create New Testimonial'}</DialogTitle>
+            <DialogContent className="p-4 sm:p-6 max-w-2xl max-h-[90vh] overflow-y-auto">
+              <DialogHeader className="pb-4 sm:pb-6">
+                <DialogTitle className="text-xl sm:text-2xl font-bold">{editingTestimonial ? 'Edit Testimonial' : 'Create New Testimonial'}</DialogTitle>
               </DialogHeader>
               <TestimonialForm testimonial={editingTestimonial} gyms={gyms} onSuccess={handleSuccess} />
             </DialogContent>
           </Dialog>
         </div>
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <div className="relative w-full">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 z-10" />
           <Input
             type="text"
             placeholder="Search testimonials by name, role, text, or gym..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 h-11 w-full max-w-md"
+            className="pl-10 h-11 w-full sm:max-w-md"
           />
         </div>
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto px-4 sm:px-0">
         <Table>
           <TableHeader>
             <TableRow className="bg-gray-50/50">
-              <TableHead className="px-8 py-5 font-semibold text-gray-900">Image</TableHead>
-              <TableHead className="px-8 py-5 font-semibold text-gray-900">Name</TableHead>
-              <TableHead className="px-8 py-5 font-semibold text-gray-900">Role</TableHead>
-              <TableHead className="px-8 py-5 font-semibold text-gray-900">Gym</TableHead>
-              <TableHead className="px-8 py-5 font-semibold text-gray-900">Status</TableHead>
-              <TableHead className="px-8 py-5 font-semibold text-gray-900 text-right">Actions</TableHead>
+              <TableHead className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-semibold text-gray-900 text-xs sm:text-sm">Image</TableHead>
+              <TableHead className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-semibold text-gray-900 text-xs sm:text-sm">Name</TableHead>
+              <TableHead className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-semibold text-gray-900 text-xs sm:text-sm">Role</TableHead>
+              <TableHead className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-semibold text-gray-900 text-xs sm:text-sm">Gym</TableHead>
+              <TableHead className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-semibold text-gray-900 text-xs sm:text-sm">Status</TableHead>
+              <TableHead className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-semibold text-gray-900 text-right text-xs sm:text-sm">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredTestimonials.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} className="text-center text-gray-500 py-16 px-6">
+                <TableCell colSpan={6} className="text-center text-gray-500 py-12 sm:py-16 px-4 sm:px-6">
                   <div className="flex flex-col items-center justify-center space-y-3">
                     <p className="text-lg font-medium">
                       {searchQuery.trim() ? 'No testimonials found matching your search' : 'No testimonials found'}
@@ -196,9 +196,9 @@ export default function TestimonialsTable({
             ) : (
               filteredTestimonials.map((testimonial) => (
                 <TableRow key={testimonial.id} className="hover:bg-gray-50/50 transition-colors">
-                  <TableCell className="px-8 py-5">
+                  <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5">
                     {testimonial.imageUrl ? (
-                      <div className="w-12 h-12 rounded-full overflow-hidden relative">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden relative">
                         <Image
                           src={testimonial.imageUrl}
                           alt={testimonial.name}
@@ -207,42 +207,42 @@ export default function TestimonialsTable({
                         />
                       </div>
                     ) : (
-                      <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-200 flex items-center justify-center">
                         <span className="text-gray-400 text-xs">{testimonial.name.charAt(0)}</span>
                       </div>
                     )}
                   </TableCell>
-                  <TableCell className="px-8 py-5 font-medium text-gray-900">{testimonial.name}</TableCell>
-                  <TableCell className="px-8 py-5 text-gray-600">{testimonial.role}</TableCell>
-                  <TableCell className="px-8 py-5 text-gray-600">{testimonial.gym?.name || '-'}</TableCell>
-                  <TableCell className="px-8 py-5">
+                  <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-medium text-gray-900 text-xs sm:text-sm">{testimonial.name}</TableCell>
+                  <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-gray-600 text-xs sm:text-sm">{testimonial.role}</TableCell>
+                  <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-gray-600 text-xs sm:text-sm">{testimonial.gym?.name || '-'}</TableCell>
+                  <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5">
                     {testimonial.isActive ? (
-                      <span className="px-3 py-1.5 bg-green-100 text-green-800 text-xs font-medium rounded-full">
+                      <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-green-100 text-green-800 text-xs font-medium rounded-full">
                         Active
                       </span>
                     ) : (
-                      <span className="px-3 py-1.5 bg-gray-100 text-gray-800 text-xs font-medium rounded-full">
+                      <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-gray-100 text-gray-800 text-xs font-medium rounded-full">
                         Inactive
                       </span>
                     )}
                   </TableCell>
-                  <TableCell className="px-8 py-5 text-right">
-                    <div className="flex items-center justify-end gap-2">
+                  <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-right">
+                    <div className="flex items-center justify-end gap-1 sm:gap-2">
                       <Button
                         variant="ghost"
                         size="icon"
                         onClick={() => handleEdit(testimonial)}
-                        className="h-9 w-9 hover:bg-gray-100"
+                        className="h-8 w-8 sm:h-9 sm:w-9 hover:bg-gray-100"
                       >
-                        <Pencil className="h-4 w-4 text-gray-600" />
+                        <Pencil className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" />
                       </Button>
                       <Button
                         variant="ghost"
                         size="icon"
                         onClick={() => handleDelete(testimonial.id)}
-                        className="h-9 w-9 hover:bg-red-50"
+                        className="h-8 w-8 sm:h-9 sm:w-9 hover:bg-red-50"
                       >
-                        <Trash2 className="h-4 w-4 text-red-500" />
+                        <Trash2 className="h-3 w-3 sm:h-4 sm:w-4 text-red-500" />
                       </Button>
                     </div>
                   </TableCell>

@@ -35,7 +35,7 @@ export default async function AdminLayout({
     <div className="min-h-screen bg-fitcamp-bg">
       <AdminSidebar user={session.user} />
       <div className="lg:pl-64">
-        <main className="p-12 sm:p-8 lg:pl-20 lg:pr-8 lg:pt-10 lg:pb-12 xl:pl-24 xl:pr-12">
+        <main className="p-8 sm:p-10 md:p-12 lg:p-16 xl:p-20">
           {children}
         </main>
       </div>

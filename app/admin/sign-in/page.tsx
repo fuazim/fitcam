@@ -62,6 +62,13 @@ export default function SignInPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
+            <p className="text-sm text-blue-800 font-semibold mb-2">Login Credentials:</p>
+            <div className="text-xs text-blue-700 space-y-1">
+              <p><strong>Email:</strong> admin@fitcamp.com</p>
+              <p><strong>Password:</strong> admin123</p>
+            </div>
+          </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>

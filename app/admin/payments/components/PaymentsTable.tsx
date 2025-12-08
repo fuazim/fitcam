@@ -128,28 +128,28 @@ export default function PaymentsTable({ initialPayments }: { initialPayments: Pa
 
   return (
     <>
-      <div className="bg-white rounded-[32px] shadow-sm border border-gray-100 overflow-hidden">
-        <div className="px-8 sm:px-10 py-8 border-b border-gray-200 bg-white">
-          <h2 className="text-xl font-semibold text-gray-900">Pending Payments</h2>
+      <div className="bg-white rounded-2xl sm:rounded-[32px] shadow-sm border border-gray-100 overflow-hidden">
+        <div className="px-4 sm:px-6 md:px-8 lg:px-10 py-4 sm:py-6 md:py-8 border-b border-gray-200 bg-white">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Pending Payments</h2>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto px-4 sm:px-0">
           <Table>
             <TableHeader>
             <TableRow className="bg-gray-50/50">
-              <TableHead className="px-8 py-5 font-semibold text-gray-900">Booking Code</TableHead>
-              <TableHead className="px-8 py-5 font-semibold text-gray-900">Customer</TableHead>
-              <TableHead className="px-8 py-5 font-semibold text-gray-900">Plan</TableHead>
-              <TableHead className="px-8 py-5 font-semibold text-gray-900">Amount</TableHead>
-              <TableHead className="px-8 py-5 font-semibold text-gray-900">Method</TableHead>
-              <TableHead className="px-8 py-5 font-semibold text-gray-900">Status</TableHead>
-              <TableHead className="px-8 py-5 font-semibold text-gray-900">Date</TableHead>
-              <TableHead className="px-8 py-5 font-semibold text-gray-900 text-right">Actions</TableHead>
+              <TableHead className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-semibold text-gray-900 text-xs sm:text-sm">Booking Code</TableHead>
+              <TableHead className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-semibold text-gray-900 text-xs sm:text-sm">Customer</TableHead>
+              <TableHead className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-semibold text-gray-900 text-xs sm:text-sm">Plan</TableHead>
+              <TableHead className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-semibold text-gray-900 text-xs sm:text-sm">Amount</TableHead>
+              <TableHead className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-semibold text-gray-900 text-xs sm:text-sm">Method</TableHead>
+              <TableHead className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-semibold text-gray-900 text-xs sm:text-sm">Status</TableHead>
+              <TableHead className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-semibold text-gray-900 text-xs sm:text-sm">Date</TableHead>
+              <TableHead className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-semibold text-gray-900 text-right text-xs sm:text-sm">Actions</TableHead>
             </TableRow>
             </TableHeader>
             <TableBody>
               {payments.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={8} className="text-center text-gray-500 py-16 px-6">
+                  <TableCell colSpan={8} className="text-center text-gray-500 py-12 sm:py-16 px-4 sm:px-6">
                     <div className="flex flex-col items-center justify-center space-y-3">
                       <p className="text-lg font-medium">No pending payments</p>
                       <p className="text-sm text-gray-400">All payments have been reviewed</p>
@@ -159,51 +159,51 @@ export default function PaymentsTable({ initialPayments }: { initialPayments: Pa
               ) : (
                 payments.map((payment) => (
                   <TableRow key={payment.id} className="hover:bg-gray-50/50 transition-colors">
-                    <TableCell className="px-8 py-5 font-mono text-sm text-gray-900">{payment.order.bookingCode}</TableCell>
-                    <TableCell className="px-8 py-5">
+                    <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 font-mono text-xs sm:text-sm text-gray-900">{payment.order.bookingCode}</TableCell>
+                    <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5">
                       {payment.order.user ? (
                         <div>
-                          <div className="font-medium text-gray-900">{payment.order.user.name || 'N/A'}</div>
-                          <div className="text-sm text-gray-500">{payment.order.user.email}</div>
+                          <div className="font-medium text-gray-900 text-xs sm:text-sm">{payment.order.user.name || 'N/A'}</div>
+                          <div className="text-xs sm:text-sm text-gray-500">{payment.order.user.email}</div>
                         </div>
                       ) : (
-                        <span className="text-gray-400">Guest</span>
+                        <span className="text-gray-400 text-xs sm:text-sm">Guest</span>
                       )}
                     </TableCell>
-                    <TableCell className="px-8 py-5 text-gray-600">{payment.order.plan.name}</TableCell>
-                    <TableCell className="px-8 py-5 text-gray-600">{formatPrice(payment.amountCents, (payment.order.currency || 'IDR') as string)}</TableCell>
-                    <TableCell className="px-8 py-5 text-gray-600">{payment.method}</TableCell>
-                    <TableCell className="px-8 py-5">
-                      <Badge className="bg-yellow-100 text-yellow-800">{payment.status}</Badge>
+                    <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-gray-600 text-xs sm:text-sm">{payment.order.plan.name}</TableCell>
+                    <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-gray-600 text-xs sm:text-sm">{formatPrice(payment.amountCents, (payment.order.currency || 'IDR') as string)}</TableCell>
+                    <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-gray-600 text-xs sm:text-sm">{payment.method}</TableCell>
+                    <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5">
+                      <Badge className="bg-yellow-100 text-yellow-800 text-xs">{payment.status}</Badge>
                     </TableCell>
-                    <TableCell className="px-8 py-5 text-gray-600">{new Date(payment.createdAt).toLocaleDateString()}</TableCell>
-                    <TableCell className="px-8 py-5 text-right">
-                      <div className="flex items-center justify-end gap-2">
+                    <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-gray-600 text-xs sm:text-sm">{new Date(payment.createdAt).toLocaleDateString()}</TableCell>
+                    <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-right">
+                      <div className="flex items-center justify-end gap-1 sm:gap-2">
                         <Button
                           variant="ghost"
                           size="icon"
                           onClick={() => handleView(payment)}
-                          className="h-9 w-9 hover:bg-gray-100"
+                          className="h-8 w-8 sm:h-9 sm:w-9 hover:bg-gray-100"
                         >
-                          <Eye className="h-4 w-4 text-gray-600" />
+                          <Eye className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" />
                         </Button>
                         <Button
                           variant="ghost"
                           size="icon"
                           onClick={() => handleApprove(payment.id)}
                           disabled={loading === payment.id}
-                          className="h-9 w-9 text-green-600 hover:text-green-700 hover:bg-green-50"
+                          className="h-8 w-8 sm:h-9 sm:w-9 text-green-600 hover:text-green-700 hover:bg-green-50"
                         >
-                          <Check className="h-4 w-4" />
+                          <Check className="h-3 w-3 sm:h-4 sm:w-4" />
                         </Button>
                         <Button
                           variant="ghost"
                           size="icon"
                           onClick={() => handleReject(payment.id)}
                           disabled={loading === payment.id}
-                          className="h-9 w-9 text-red-600 hover:text-red-700 hover:bg-red-50"
+                          className="h-8 w-8 sm:h-9 sm:w-9 text-red-600 hover:text-red-700 hover:bg-red-50"
                         >
-                          <X className="h-4 w-4" />
+                          <X className="h-3 w-3 sm:h-4 sm:w-4" />
                         </Button>
                       </div>
                     </TableCell>
@@ -216,9 +216,9 @@ export default function PaymentsTable({ initialPayments }: { initialPayments: Pa
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-6">
-          <DialogHeader className="pb-6">
-            <DialogTitle className="text-2xl font-bold">Payment Details</DialogTitle>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-4 sm:p-6">
+          <DialogHeader className="pb-4 sm:pb-6">
+            <DialogTitle className="text-xl sm:text-2xl font-bold">Payment Details</DialogTitle>
           </DialogHeader>
           {selectedPayment && (
             <PaymentDetail
