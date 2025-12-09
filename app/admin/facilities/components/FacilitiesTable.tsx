@@ -156,7 +156,7 @@ export default function FacilitiesTable({ initialFacilities }: { initialFaciliti
             <DialogTrigger asChild>
               <Button
                 onClick={handleCreate}
-                className="w-full bg-fitcamp-royal-blue hover:bg-fitcamp-royal-blue/90 text-white px-6 py-2.5 rounded-lg font-medium shadow-sm"
+                className="w-full sm:w-fit bg-fitcamp-royal-blue hover:bg-fitcamp-royal-blue/90 text-white px-6 py-2.5 rounded-lg font-medium shadow-sm"
               >
                 <Plus className="mr-2 h-4 w-4" />
                 Add Facility
