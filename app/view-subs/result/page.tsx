@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -58,7 +58,7 @@ interface Order {
   } | null;
 }
 
-export default function ViewSubsResultPage() {
+function ViewSubsResultContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const orderId = searchParams.get('orderId');
@@ -152,27 +152,17 @@ export default function ViewSubsResultPage() {
 
   if (loading) {
     return (
-      <main className="pb-0">
-        <div id="background" className="absolute w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[345px] top-0 z-0 bg-[#9FDDFF]"></div>
-        <Header hamburgerColor="black" />
-        <div className="flex items-center justify-center min-h-screen px-4">
-          <p className="text-lg sm:text-xl text-center">Loading order details...</p>
-        </div>
-        <Footer />
-      </main>
+      <div className="flex items-center justify-center min-h-screen px-4">
+        <p className="text-lg sm:text-xl text-center">Loading order details...</p>
+      </div>
     );
   }
 
   if (!order) {
     return (
-      <main className="pb-0">
-        <div id="background" className="absolute w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[345px] top-0 z-0 bg-[#9FDDFF]"></div>
-        <Header hamburgerColor="black" />
-        <div className="flex items-center justify-center min-h-screen px-4">
-          <p className="text-lg sm:text-xl text-center">Order not found</p>
-        </div>
-        <Footer />
-      </main>
+      <div className="flex items-center justify-center min-h-screen px-4">
+        <p className="text-lg sm:text-xl text-center">Order not found</p>
+      </div>
     );
   }
 
@@ -182,9 +172,7 @@ export default function ViewSubsResultPage() {
   const paymentStatus = order?.payment?.status || order?.status || 'PENDING';
 
   return (
-    <main className="pb-0">
-      <div id="background" className="absolute w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[345px] top-0 z-0 bg-[#9FDDFF]"></div>
-      <Header hamburgerColor="black" />
+    <>
       <div className="relative flex flex-col lg:flex-row justify-center w-full max-w-[1280px] gap-4 sm:gap-6 mx-auto px-4 sm:px-6 md:px-10 mt-8 sm:mt-12 md:mt-16 lg:mt-[96px] mb-8 md:mb-16">
         {/* Left Card: Transaction Ticket */}
         <AnimateOnScroll animation="fadeInUp">
@@ -251,6 +239,22 @@ export default function ViewSubsResultPage() {
           </div>
         </AnimateOnScroll>
       </div>
+    </>
+  );
+}
+
+export default function ViewSubsResultPage() {
+  return (
+    <main className="pb-0">
+      <div id="background" className="absolute w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[345px] top-0 z-0 bg-[#9FDDFF]"></div>
+      <Header hamburgerColor="black" />
+      <Suspense fallback={
+        <div className="flex items-center justify-center min-h-screen px-4">
+          <p className="text-lg sm:text-xl text-center">Loading order details...</p>
+        </div>
+      }>
+        <ViewSubsResultContent />
+      </Suspense>
       <Footer />
       <ToTopButton />
     </main>

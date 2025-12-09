@@ -16,9 +16,12 @@ interface PromoCode {
   minPurchaseCents: number;
   maxDiscountCents: number | null;
   usageLimit: number | null;
+  usedCount?: number;
   isActive: boolean;
   validFrom: Date | string | null;
   validUntil: Date | string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 }
 
 export default function PromoCodeForm({
@@ -26,11 +29,11 @@ export default function PromoCodeForm({
   onSuccess,
 }: {
   promoCode: PromoCode | null;
-  onSuccess: (newPromoCode?: PromoCode) => void;
+  onSuccess: (newPromoCode?: PromoCode) => void | Promise<void>;
 }) {
   const [loading, setLoading] = useState(false);
   const [discountType, setDiscountType] = useState<'percent' | 'fixed'>(
-    promoCode?.discountPercent > 0 ? 'percent' : 'fixed'
+    (promoCode?.discountPercent ?? 0) > 0 ? 'percent' : 'fixed'
   );
 
   const { register, handleSubmit, reset, watch, setValue } = useForm({

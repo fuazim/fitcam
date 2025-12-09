@@ -29,6 +29,8 @@ interface Gym {
   isPopular: boolean;
   openingStartTime: string | null;
   openingEndTime: string | null;
+  contactPersonName: string | null;
+  contactPersonPhone: string | null;
   cityId: string;
   city: {
     id: string;
@@ -36,7 +38,7 @@ interface Gym {
     slug: string;
   };
   images: Array<{ url: string; sortOrder: number }>;
-  facilities?: Array<{ facilityId: string; facility: { id: string; name: string } }>;
+  facilities?: Array<{ facilityId: string; facility?: { id: string; name: string; iconUrl: string | null } }>;
 }
 
 interface City {

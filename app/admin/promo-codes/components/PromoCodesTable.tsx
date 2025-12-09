@@ -27,12 +27,12 @@ interface PromoCode {
   minPurchaseCents: number;
   maxDiscountCents: number | null;
   usageLimit: number | null;
-  usedCount: number;
+  usedCount?: number;
   isActive: boolean;
   validFrom: Date | string | null;
   validUntil: Date | string | null;
-  createdAt: Date | string;
-  updatedAt: Date | string;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 }
 
 export default function PromoCodesTable({ initialPromoCodes }: { initialPromoCodes: PromoCode[] }) {
@@ -215,10 +215,10 @@ export default function PromoCodesTable({ initialPromoCodes }: { initialPromoCod
                   <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-gray-600 text-xs sm:text-sm">
                     {promoCode.usageLimit ? (
                       <span>
-                        {promoCode.usedCount} / {promoCode.usageLimit}
+                        {promoCode.usedCount ?? 0} / {promoCode.usageLimit}
                       </span>
                     ) : (
-                      <span>{promoCode.usedCount} (unlimited)</span>
+                      <span>{promoCode.usedCount ?? 0} (unlimited)</span>
                     )}
                   </TableCell>
                   <TableCell className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5">

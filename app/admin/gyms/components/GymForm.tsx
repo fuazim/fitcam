@@ -56,7 +56,7 @@ export default function GymForm({
   gym: Gym | null;
   cities: City[];
   facilities: Facility[];
-  onSuccess: () => void;
+  onSuccess: (newGym?: any) => void;
 }) {
   const [loading, setLoading] = useState(false);
   const [selectedFacilities, setSelectedFacilities] = useState<string[]>(

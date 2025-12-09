@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -38,7 +38,7 @@ interface Order {
   } | null;
 }
 
-export default function PaymentPage() {
+function PaymentContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const orderId = searchParams.get('orderId');
@@ -142,34 +142,22 @@ export default function PaymentPage() {
 
   if (loading) {
     return (
-      <main className="pb-0">
-        <div id="background" className="absolute w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[345px] top-0 z-0 bg-[#9FDDFF]"></div>
-        <Header hamburgerColor="black" />
-        <div className="flex items-center justify-center min-h-screen px-4">
-          <p className="text-lg sm:text-xl text-center">Loading order details...</p>
-        </div>
-        <Footer />
-      </main>
+      <div className="flex items-center justify-center min-h-screen px-4">
+        <p className="text-lg sm:text-xl text-center">Loading order details...</p>
+      </div>
     );
   }
 
   if (!order) {
     return (
-      <main className="pb-0">
-        <div id="background" className="absolute w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[345px] top-0 z-0 bg-[#9FDDFF]"></div>
-        <Header hamburgerColor="black" />
-        <div className="flex items-center justify-center min-h-screen px-4">
-          <p className="text-lg sm:text-xl text-center">Order not found</p>
-        </div>
-        <Footer />
-      </main>
+      <div className="flex items-center justify-center min-h-screen px-4">
+        <p className="text-lg sm:text-xl text-center">Order not found</p>
+      </div>
     );
   }
 
   return (
-    <main className="pb-0">
-      <div id="background" className="absolute w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[345px] top-0 z-0 bg-[#9FDDFF]"></div>
-      <Header hamburgerColor="black" />
+    <>
       <form onSubmit={handleSubmit} id="content" className="relative flex flex-col lg:flex-row w-full max-w-[1280px] gap-4 sm:gap-6 mx-auto px-4 sm:px-6 md:px-10 mt-8 sm:mt-12 md:mt-16 lg:mt-[96px] mb-8 md:mb-16">
         <div className="flex flex-col gap-4 sm:gap-6 w-full max-w-full lg:max-w-[820px] shrink-0">
           <div id="account" className="flex flex-col w-full rounded-3xl p-4 sm:p-6 md:p-8 gap-4 sm:gap-6 bg-white">
@@ -317,6 +305,22 @@ export default function PaymentPage() {
           </div>
         </aside>
       </form>
+    </>
+  );
+}
+
+export default function PaymentPage() {
+  return (
+    <main className="pb-0">
+      <div id="background" className="absolute w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[345px] top-0 z-0 bg-[#9FDDFF]"></div>
+      <Header hamburgerColor="black" />
+      <Suspense fallback={
+        <div className="flex items-center justify-center min-h-screen px-4">
+          <p className="text-lg sm:text-xl text-center">Loading order details...</p>
+        </div>
+      }>
+        <PaymentContent />
+      </Suspense>
       <Footer />
     </main>
   );

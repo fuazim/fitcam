@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -16,7 +16,7 @@ interface Plan {
   imageUrl: string | null;
 }
 
-export default function CheckoutPage() {
+function CheckoutContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const planId = searchParams.get('planId');
@@ -257,10 +257,7 @@ export default function CheckoutPage() {
   };
 
   return (
-    <main className="pb-0">
-      <div id="background" className="absolute w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[345px] top-0 z-0 bg-[#9FDDFF]"></div>
-      <Header hamburgerColor="black" />
-      <form onSubmit={handleSubmit} id="content" className="relative flex flex-col lg:flex-row w-full max-w-[1280px] gap-4 sm:gap-6 mx-auto px-4 sm:px-6 md:px-10 mt-8 sm:mt-12 md:mt-16 lg:mt-[96px] mb-8 md:mb-16">
+    <form onSubmit={handleSubmit} id="content" className="relative flex flex-col lg:flex-row w-full max-w-[1280px] gap-4 sm:gap-6 mx-auto px-4 sm:px-6 md:px-10 mt-8 sm:mt-12 md:mt-16 lg:mt-[96px] mb-8 md:mb-16">
         <div className="flex flex-col gap-4 sm:gap-6 w-full max-w-full lg:max-w-[820px] shrink-0">
           <div id="account" className="flex flex-col w-full rounded-3xl p-4 sm:p-6 md:p-8 gap-4 sm:gap-6 bg-white">
             <div className="flex flex-col gap-2">
@@ -446,6 +443,27 @@ export default function CheckoutPage() {
           </div>
         </aside>
       </form>
+  );
+}
+
+export default function CheckoutPage() {
+  return (
+    <main className="pb-0">
+      <div id="background" className="absolute w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[345px] top-0 z-0 bg-[#9FDDFF]"></div>
+      <Header hamburgerColor="black" />
+      <Suspense fallback={
+        <div className="relative flex flex-col lg:flex-row w-full max-w-[1280px] gap-4 sm:gap-6 mx-auto px-4 sm:px-6 md:px-10 mt-8 sm:mt-12 md:mt-16 lg:mt-[96px] mb-8 md:mb-16">
+          <div className="flex flex-col gap-4 sm:gap-6 w-full max-w-full lg:max-w-[820px] shrink-0">
+            <div className="flex flex-col w-full rounded-3xl p-4 sm:p-6 md:p-8 gap-4 sm:gap-6 bg-white">
+              <div className="flex items-center justify-center py-8">
+                <p className="text-gray-500">Loading...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      }>
+        <CheckoutContent />
+      </Suspense>
       <Footer />
     </main>
   );
